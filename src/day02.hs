@@ -10,10 +10,7 @@ import Control.Monad
 import Data.List
 
 {-| 
-= Main Function :
-- Parses Input from file to list of Integers;
-- Calls `dayOne` function with 1 to solve AoC1p1;
-- Calls `dayOne` function with 3 to solve AoC1p2.
+= Main Function 
 -}
 main = do  
         let list = []
