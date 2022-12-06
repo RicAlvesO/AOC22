@@ -3,7 +3,7 @@
 -Descrição       : Haskell module to solve day 03 of AoC
 -Desenvolvedores : Ricardo Oliveira <ricaoimp@gmail.com>
 -}
-module Day01 where
+module Day03 where
 
 import System.IO  
 import Control.Monad
