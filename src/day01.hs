@@ -5,18 +5,18 @@
 -}
 module Day01 where
 
-import System.IO  
-import Control.Monad
+import System.IO
 import Data.List
+import Utils
 
 {-| 
 = Main Function
 -}
 main = do  
         let list = []
-        file <- openFile "data/day01.txt" ReadMode
+        file <- openFile "../data/day01.txt" ReadMode
         contents <- hGetContents file 
-        let elfStrs = parseContents contents [] []
+        let elfStrs = splitBlankLines contents []
             elfCals = parseCals elfStrs []
             maxCal = maximum elfCals
             topCals = sum $ take 3 $ reverse $ sort elfCals
@@ -25,24 +25,6 @@ main = do
         print "Start 2:"
         print topCals
         hClose file 
-
-{-|
-==== toNumber :
-Converts list of strings to list of Integers.
--}
-toNumber :: [String] -> [Int]
-toNumber = map read
-
-{-|
-==== parseContents :
-Converts a list of characters into a list of strings separated by blank lines
--}
-parseContents :: [Char] -> [Char] -> [String] -> [String]
-parseContents [] _ l = l
-parseContents (x:xs) [] l = parseContents xs [x] l
-parseContents (x:xs) y l
-    |x==(last y) && x=='\n' = parseContents xs [] (l++[y])
-    |otherwise = parseContents xs (y++[x]) l 
 
 {-|
 ==== parseCals :

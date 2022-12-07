@@ -6,7 +6,6 @@
 module Day03 where
 
 import System.IO  
-import Control.Monad
 import Data.List
 import Data.Char
 
@@ -15,7 +14,7 @@ import Data.Char
 -}
 main = do  
         let list = []
-        file <- openFile "data/day03.txt" ReadMode
+        file <- openFile "../data/day03.txt" ReadMode
         contents <- hGetContents file 
         let lines = words contents
             rucksacks = map (\x -> splitAt (div (length x) 2) x) lines

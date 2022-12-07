@@ -5,18 +5,17 @@
 -}
 module Day02 where
 
-import System.IO  
-import Control.Monad
-import Data.List
+import System.IO
+import Utils
 
 {-| 
 = Main Function 
 -}
 main = do  
         let list = []
-        file <- openFile "data/day02.txt" ReadMode
+        file <- openFile "../data/day02.txt" ReadMode
         contents <- hGetContents file 
-        let games = parseGames contents []
+        let games = parseGames contents 
             scores = map checkScore games
             newScores = map checkShape games
         print "Star 1:"
@@ -26,21 +25,11 @@ main = do
         hClose file 
 
 {-|
-==== toNumber :
-Converts list of strings to list of Integers.
--}
-toNumber :: [String] -> [Int]
-toNumber = map read
-
-{-|
 ==== parseContents :
 Converts a list of characters into a list of strings separated by blank lines
 -}
-parseGames :: [Char] -> [(String,String)] -> [(String,String)]
-parseGames [] l = l
-parseGames a l = parseGames (snd b) l++[(game!!0,game!!1)] 
-    where b=splitAt 4 a
-          game=words (fst b)
+parseGames :: [Char] -> [(String,String)]
+parseGames l = map (splitStrAt ' ') (splitStrBy '\n' l)
 
 {-|
 ==== checkScore :

@@ -5,17 +5,15 @@
 -}
 module Day04 where
 
-import System.IO  
-import Control.Monad
-import Data.List
-import Data.Char
+import System.IO
+import Utils
 
 {-| 
 = Main Function 
 -}
 main = do  
         let list = []
-        file <- openFile "data/day04.txt" ReadMode
+        file <- openFile "../data/day04.txt" ReadMode
         contents <- hGetContents file 
         let lines = words contents
             sections = map (\x -> buildSections $ splitStrAt ',' x) lines
@@ -27,22 +25,26 @@ main = do
         print (sum containsSome)
         hClose file 
 
-splitStrAt :: Char -> String -> (String,String)
-splitStrAt c l = buildPairs c ([],[]) l  
-
-buildPairs :: Char -> (String,String) -> String -> (String,String)
-buildPairs _ r [] = r
-buildPairs c (r1,r2) (x:xs)
-    |c==x = (r1,r2++xs)
-    |otherwise = buildPairs c (r1++[x],r2) xs 
-
+{-|
+==== buildSections:
+Given a pair of two strings representing a range between two numbers,
+create a pair of the two lists of sections.
+-}
 buildSections :: (String,String) -> ([Int],[Int])
 buildSections (s1,s2) = ([(read (fst r1)::Int)..(read (snd r1)::Int)],[(read (fst r2)::Int)..(read (snd r2)::Int)])
     where r1 = splitStrAt '-' s1
           r2 = splitStrAt '-' s2
 
+{-|
+==== intersections:
+Check if one list is completely contained in another
+-}
 intersections :: [Int] -> [Int] -> Bool
 intersections x y = (elem False (map (\a -> elem a y ) x))==False || (elem False (map (\b -> elem b x) y))==False
 
+{-|
+==== someIntersections:
+Check if any elemente of a list is contained in the other
+-}
 someIntersections :: [Int] -> [Int] -> Bool
 someIntersections x y = elem True (map (\a -> elem a y ) x)
