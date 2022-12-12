@@ -46,3 +46,9 @@ Converts list of strings to list of Integers.
 -}
 toNumber :: [String] -> [Int]
 toNumber = map read
+
+replace :: Int -> [a] -> a -> [a]
+replace _ [] _ = []
+replace n (x:xs) y
+   | n == 0 = y:xs
+   | otherwise = x:replace (n-1) xs y

@@ -1,6 +1,6 @@
 {-|
-=Module          : Day 03 - Advent of Code
--Descrição       : Haskell module to solve day 03 of AoC
+=Module          : Day 04 - Advent of Code
+-Descrição       : Haskell module to solve day 04 of AoC
 -Desenvolvedores : Ricardo Oliveira <ricaoimp@gmail.com>
 -}
 module Day04 where
